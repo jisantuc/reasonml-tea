@@ -19,4 +19,5 @@ let make = (~message) =>
   <div onClick={handleClick}>
     {ReasonReact.string(message)}
     <CountingButton />
+    <TextInput />
   </div>;
