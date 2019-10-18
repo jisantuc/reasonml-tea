@@ -1,28 +1,33 @@
-type state = {
-    count: int
-};
+type state = {count: int};
 
-type action = 
+type action =
   | Increment
   | Decrement;
 
 [@react.component]
 let make = () => {
-    let (state, dispatch) = React.useReducer((state, action) =>
+  let (state, dispatch) =
+    React.useReducer(
+      (state, action) =>
         switch (action) {
-        | Increment => { count: state.count + 1 }
-        | Decrement => { count: state.count - 1 }
-        }, {count: 0});
+        | Increment => {count: state.count + 1}
+        | Decrement => {count: state.count - 1}
+        },
+      {count: 0},
+    );
 
-    let message = "Current value: " ++ string_of_int(state.count);
+  let message = "Current value: " ++ string_of_int(state.count);
 
+  <div>
+    <h2> {ReasonReact.string("Some buttons!")} </h2>
     <div>
       <button onClick={_event => dispatch(Decrement)}>
         {ReasonReact.string("-")}
       </button>
-      { ReasonReact.string(message) }
+      {ReasonReact.string(message)}
       <button onClick={_event => dispatch(Increment)}>
         {ReasonReact.string("+")}
       </button>
-    </div>;
+    </div>
+  </div>;
 };
